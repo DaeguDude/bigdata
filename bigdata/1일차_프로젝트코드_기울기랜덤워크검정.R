@@ -263,18 +263,18 @@ xt<-xt[2:length(xt)]
 plot(xt~xt_1,
 	xlab='Xt',			#x축의 라벨지정
 	ylab='Xt+1',		#y축의 라벨지정
-	main=paste('rho = ',rho,'기울기 = ',round(lm(xt~xt_1+0)$coef[1],3)),#플롯의 이름지정
+	main=paste('rho = ',rho,', slope = ',round(lm(xt~xt_1+0)$coef[1],3)),#플롯의 이름지정
 	xlim=c(mean_xt-4*std_xt,mean_xt+4*std_xt),	#x축의 범위지정 범위는 평균+- 4*표쥰편차
 	ylim=c(mean_xt-4*std_xt,mean_xt+4*std_xt))	#y축의 범위지정 범위는 평균+- 4*표쥰편차
 	abline(lm(xt~xt_1+0))	#회귀식을 받아서 플롯에 그리는 함수
 	print(lm(xt~xt_1+0))	#회귀분석 결과를 출력. 알파 값과 베타 값을 확인 가능
-}
+} # xt_plot
 
 #실험시작
 set.seed(123)
 xt_plot(1,100,'rnorm')
 xt_plot(1,100,'rcauchy')
-xt_plot(1,100,'rchisq')
+xt_plot(-1,100,'rchisq')
 xt_plot(1,100,'runif')
 
 
