@@ -23,7 +23,8 @@ ggplot(samsung_data, aes(x=quarter)) +
   
   # 이익
   geom_line(aes(y = profit), group=1, color="steelblue") +
-  geom_point(aes(y = profit))
+  geom_point(aes(y = profit)) +
+  ggtitle("Samsung Revenue and Profit Comparison")
 
 # ------------------------------------------------------------------------
 # 삼성전자 주식가격을 엑셀파일에서 읽고, 시도표를 그림
@@ -48,3 +49,4 @@ plot(after_stock_split$종가, type="l",
 plot(before_stock_split$종가, type="l",
      main="Samsung Stock Price Before Split",
      xlab="t", ylab="xt(price)")
+
