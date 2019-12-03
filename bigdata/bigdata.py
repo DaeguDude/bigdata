@@ -28,11 +28,12 @@ for i in range(1, 591):
 
 # All the stock prices are merged into one dataframe 
 stock_data = pd.concat(frames)
+print(type(stock_data))
 
 
-writer = pd.ExcelWriter('samsung-stock.xlsx')
-stock_data.to_excel(writer, 'Sheet1', index=False)
-writer.save()
+# writer = pd.ExcelWriter('samsung-stock.xlsx')
+# stock_data.to_excel(writer, 'Sheet1', index=False)
+# writer.save()
 
 
 

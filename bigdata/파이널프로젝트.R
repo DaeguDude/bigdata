@@ -24,3 +24,27 @@ ggplot(samsung_data, aes(x=quarter)) +
   # 이익
   geom_line(aes(y = profit), group=1, color="steelblue") +
   geom_point(aes(y = profit))
+
+# ------------------------------------------------------------------------
+# 삼성전자 주식가격을 엑셀파일에서 읽고, 시도표를 그림
+# install.packages("readxl")
+library("readxl")
+
+# after stock split to present
+after_stock_split <- read_excel("samsung-stock-price.xlsx", sheet=1)
+
+# past to stock split
+before_stock_split <- read_excel("samsung-stock-price.xlsx", sheet=2)
+
+# extract the price from the data
+after_stock_split$종가
+before_stock_split$종가
+
+
+# timeseries graph for both before & after
+plot(after_stock_split$종가, type="l", 
+     main="Samsung Stock Price After Split",
+     xlab="t", ylab="xt(price)")
+plot(before_stock_split$종가, type="l",
+     main="Samsung Stock Price Before Split",
+     xlab="t", ylab="xt(price)")
