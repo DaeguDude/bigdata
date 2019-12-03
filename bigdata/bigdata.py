@@ -14,22 +14,33 @@ data = r.text
 soup = BeautifulSoup(data, 'html.parser')
 
 
+# frame is the place where we will store all the lists of stock prices
+frames = []
 
-newurl= "https://finance.naver.com" + soup.find('iframe', attrs={'title': '일별 시세'})['src']
-newurl = (newurl + "&page=1")
-dfs=pd.read_html(newurl)
-df=dfs[0]
-df1 = df.dropna(how='any', axis=0)
+# now we will scrape from page 1 to page 590. Where the samsung stock started
+for i in range(1, 591):
+  newurl= "https://finance.naver.com" + soup.find('iframe', attrs={'title': '일별 시세'})['src']
+  newurl = f'{newurl}&page={i}'
+  dfs=pd.read_html(newurl)
+  df=dfs[0]
+  df = df.dropna(how='any', axis=0)
+  frames.append(df)
 
-newurl= "https://finance.naver.com" + soup.find('iframe', attrs={'title': '일별 시세'})['src']
-newurl = (newurl + "&page=590")
-dfs=pd.read_html(newurl)
-df=dfs[0]
-df2 = df.dropna(how='any', axis=0)
+# All the stock prices are merged into one dataframe 
+stock_data = pd.concat(frames)
 
-frames = [df1, df2]
-result = pd.concat(frames)
-print(result)
+
+writer = pd.ExcelWriter('samsung-stock.xlsx')
+stock_data.to_excel(writer, 'Sheet1', index=False)
+writer.save()
+
+
+
+
+
+
+
+
 
 
 
